@@ -70,3 +70,47 @@ class Solution:
                     return False
             
         return True
+
+
+# Simple solution using only angle
+# Angle should be same b/w two points
+
+class Solution:
+    def checkStraightLine(self, coordinates):
+        
+        if not coordinates:
+            return False      
+        
+        if len(coordinates) == 2:
+            return True
+        
+        x1, y1 = coordinates[0]
+        x2, y2 = coordinates[1]
+        angle = None
+        if x2 - x1 == 0:
+            angle = 'infinity'
+
+        else:
+            angle = (y2- y1)/(x2 - x1)
+
+        for point in coordinates[2:]:
+            x, y = point
+            
+            if angle == 'infinity':
+                if x - x2 == 0:
+                    continue 
+                else:
+                    return False
+
+            elif angle == (y - y2) / (x - x2):
+                continue
+
+            else:
+                return False
+
+        return True
+
+        
+obj = Solution()
+print(obj.checkStraightLine([[1,2],[2,3],[3,4],[4,5],[5,6],[6,7]]))
+        
